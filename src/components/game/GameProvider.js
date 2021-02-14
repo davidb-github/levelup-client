@@ -12,6 +12,8 @@ export const GameProvider = (props) => {
             }
         })
             .then(response => response.json())
+            .then(response => {console.log ("response:", response)
+        return response})
             .then(setGames)
     }
 
