@@ -17,7 +17,7 @@ export const GameForm = () => {
         numberOfPlayers: 0,
         title: "",
         maker: "",
-        gameTypeId: 0
+        gameTypeId: 1
     })
 
     /*
@@ -78,6 +78,11 @@ export const GameForm = () => {
                     <input type="text" name="title" required autoFocus className="form-control"
                         value={currentGame.title}
                         onChange={changeGameTitleState}
+                    />
+                    <label htmlFor="maker">Maker: </label>
+                    <input type="text" name="maker" required autoFocus className="form-control"
+                        value={currentGame.maker}
+                        onChange={changeGameMakerState}
                     />
                 </div>
             </fieldset>
