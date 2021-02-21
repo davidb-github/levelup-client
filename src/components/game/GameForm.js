@@ -75,12 +75,20 @@ export const GameForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="title">Title: </label>
-                    <input type="text" name="title" required autoFocus className="form-control"
+                    <input 
+                        type="text" 
+                        name="title" 
+                        required autoFocus 
+                        className="form-control"
                         value={currentGame.title}
                         onChange={changeGameTitleState}
                     />
                     <label htmlFor="maker">Maker: </label>
-                    <input type="text" name="maker" required autoFocus className="form-control"
+                    <input 
+                        type="text"
+                        name="maker"
+                        required autoFocus
+                        className="form-control"
                         value={currentGame.maker}
                         onChange={changeGameMakerState}
                     />
