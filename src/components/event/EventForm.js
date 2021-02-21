@@ -2,12 +2,14 @@ import { createEvent } from "@testing-library/react"
 import React, { useContext, useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { GameContext } from "../game/GameProvider.js"
+import { EventContext } from "../event/EventProvider.js"
 
 
 
 export const EventForm = () => {
-    const history = useHistory()
+    const history           = useHistory()
     const {games, getGames} = useContext(GameContext)
+    const { createEvent}    = useContext(EventContext)
     const [currentEvent, setCurrentEvent] = useState({
         location: "",
         eventTime: "",
@@ -38,7 +40,9 @@ export const EventForm = () => {
                         <option value="0">Select a game...</option>
                         {
                             games.map(game => (
-                                <option key= {game.id} value= {game.id}>
+                                <option 
+                                key= {game.id} 
+                                value= {game.id}>
                                 {game.title}
                                 </option>
                             ))
@@ -47,17 +51,32 @@ export const EventForm = () => {
                 </div>
             </fieldset>
 
-            {/* Create the rest of the input fields */}
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="eventTime">Event Date/Time </label>
+                    <input type="datetime-local" name="eventTime" required autoFocus className="form-control"
+                        value={currentEvent.eventTime}
+                        onChange={changeEventState}>
+
+                    </input>
+                </div>
+            </fieldset>
 
             <button type="submit"
                 onClick={evt => {
                     evt.preventDefault()
 
                     // Create the event
-                    
-
+                    const userEvent = {
+                        gameId: parseInt(currentEvent.gameId),
+                        eventTime: currentEvent.eventTime
+                    }
+                    console.log("currentEvent: ", currentEvent.gameId)
 
                     // Once event is created, redirect user to event list
+                    createEvent(userEvent)
+                    .then(() => history.push("/events"))
+
                 }}
                 className="btn btn-primary">Create Event</button>
         </form>
