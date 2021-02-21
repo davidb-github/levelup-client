@@ -1,3 +1,4 @@
+import { createEvent } from "@testing-library/react"
 import React, { useContext, useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { GameContext } from "../game/GameProvider.js"
@@ -7,9 +8,11 @@ import { GameContext } from "../game/GameProvider.js"
 export const EventForm = () => {
     const history = useHistory()
     const {games, getGames} = useContext(GameContext)
-
     const [currentEvent, setCurrentEvent] = useState({
-        location: ""
+        location: "",
+        eventTime: "",
+        schedulerId: 0,
+        gameId: 0
     })
 
     useEffect(() => {
@@ -35,7 +38,9 @@ export const EventForm = () => {
                         <option value="0">Select a game...</option>
                         {
                             games.map(game => (
-                                <option></option>
+                                <option key= {game.id} value= {game.id}>
+                                {game.title}
+                                </option>
                             ))
                         }
                     </select>
@@ -49,6 +54,7 @@ export const EventForm = () => {
                     evt.preventDefault()
 
                     // Create the event
+                    
 
 
                     // Once event is created, redirect user to event list
